@@ -1,0 +1,209 @@
+body {
+    --orange: #F7941D;
+    --light-red: #F54748;
+    --red: #9F1313;
+    --green: #139F15;
+    --light-blue: #62688F;
+    --light-white: #F4F4F4;
+    --light-grey: #B9B9B9;
+    background-color: var(--light-white);
+    --margin-x: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+/* For Animation ------------------------------------ */
+/* For Header ----------------------------------------*/
+.component {
+    margin: 0px var(--margin-x);
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
+    opacity: 0;
+    animation: appear .8s ease forwards;
+}
+header.component { 
+    /* animation-delay: .5s; */
+    animation-duration: .6s;
+}
+.table.component{
+    animation-delay: .2s;
+}
+.table .tbody{
+    height: 0px;
+    animation: openup .8s 1s ease-in-out forwards;
+}
+.chart-container.component{
+    animation-delay: .2s;
+}
+.logobrand,.coininfor,.pricearea,.grossarea,.appear{
+    opacity: 0;
+    animation: appear .8s ease forwards;
+}
+.logobrand{
+    animation-delay: 0.1s;
+}
+.coininfor{
+    animation-delay: 0.2s;
+}
+.pricearea{
+    animation-delay: 0.3s;
+}
+.grossarea{
+    animation-delay: 0.4s;
+}
+.appear{
+    animation-delay: 0.5s;
+}
+@keyframes appear {
+    0%{
+        transform: scale(0);
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes openup{
+    0%{
+        height: 0px;
+        opacity: 0;
+    }
+    100%{
+        height: 450px;
+        opacity: 1;
+    }
+}
+/* END For Animation ------------------------------------ */
+/* logobrand Component */
+.brand {
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: -5px;
+}
+
+/* coininfor Component*/
+.coininfor {
+    padding-left: calc(var(--margin-x) + 5px);
+    padding-bottom: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.coininfor .name {
+    font-size: 35px;
+    padding-right: 20px;
+}
+
+.coininfor .shortname {
+    color: var(--light-grey);
+}
+
+/* area component */
+.area {
+    padding: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.area .value {
+    font-size: 34px;
+}
+
+/* switchcoin component */
+.switchcoin.ethereum{
+    --color: var(--light-blue);
+}
+.switchcoin.bitcoin{
+    --color: var(--orange);
+}
+.switchcoin .btn {
+    margin-left: 30px;
+    border-radius: 20px;
+    border: 3px solid var(--color);
+    transition: 0.3s;
+    color: var(--color);
+    font-weight: bold;
+    font-size: 34px;
+}
+.switchcoin .btn:hover {
+    transform: scale(1.1);
+}
+.switchcoin .btn .name {
+    padding: 0px 20px;
+}
+
+/* For Main ----------------------------------------*/
+main {
+    margin: var(--margin-x);
+}
+
+/* table component */
+.table * {
+    font-weight: bold;
+}
+
+.table .theader,
+.tbody .tr {
+    display: flex;
+    align-items: center;
+}
+
+.table .theader div,
+.tbody .tr div {
+    width: 33%;
+    text-align: center;
+}
+
+.tbody {
+    height: 450px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.tbody .tr.up {
+    color: var(--green);
+}
+
+.tbody .tr.down {
+    color: var(--red);
+}
+/* chart component */
+.chart-container{
+    padding: 20px;
+}
+.chart{
+    height: 380px;
+    margin-bottom: 20px;
+}
+.text-container .text{
+    width: 75%;
+    margin-right: 40px;
+    text-align: justify ;
+}
+.text-container .btn{
+    padding: 10px 40px;
+    border-radius: 20px;
+    border: 1px solid var(--red);
+}
+/*----------------------------------------------------*/
