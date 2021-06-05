@@ -75,15 +75,15 @@ export default {
             formattedLabels: [],
             currentPrices: [], // <- Without it, won't update
             predictPrices: [], // <- Without it, won't update
-                            // test: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450], // <- Test case
+            // test: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450], // <- Test case
                             // 70, 80, 111, 129, 135, 209, 247, 372, 400, 426          // <- Test case
             // Chart Generator
             data:{
                 labels: // <- X Axis
                 [],
-                datasets: [ // <- Y Axis
+                datasets: [ 
                     {
-                        data: [],
+                        data: [], // <- Y Axis
                         label: 'Current price',
                         borderColor: '#3e95cd',
                         fill: false,
@@ -109,6 +109,7 @@ export default {
         // For easy call 
         
         this.moneyFormatterInit();
+        // Easy call
         this.id = this.detail.id ;
         this.name = this.detail.name;
         this.image = this.detail.image;
@@ -118,12 +119,13 @@ export default {
     },
     async mounted(){
         // DO these things to config data, later will pass to LineChart, / 1000 because it has limit.
+        var ratio = 1000;
         // ---------------------------------------------------------------------------------
-        this.currentPrices = await this.tableData.map( (obj) => obj.currentPrice/1000 ); 
+        this.currentPrices = await this.tableData.map( (obj) => obj.currentPrice/ratio ); 
         await this.setDataSet('Current price',this.currentPrices);
-        this.predictPrices = await this.tableData.map( (obj) => obj.predictPrice/1000 ); 
+        this.predictPrices = await this.tableData.map( (obj) => obj.predictPrice/ratio ); 
         await this.setDataSet('Predicted price',this.predictPrices);
-        this.setLabels(['1/6/2021','2/6/2021','3/6/2021','4/6/2021','5/6/2021','6/6/2021']);
+        this.setLabels(this.tableData.map( (obj) => obj.date ));
         // ---------------------------------------------------------------------------------
         await setTimeout(() => { this.data = this.getData(); }, 1000);
          // <- Update Data Array.

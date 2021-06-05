@@ -51,8 +51,8 @@ export default {
                 id: 1,
                 date: "01/06/2021",
                 currentPrice: 120000,
-                predictPrice: 90000,
-                optionClass: "down",
+                predictPrice: null,
+                optionClass: "",
               },
               {
                 id: 2,
@@ -108,7 +108,7 @@ export default {
               {
                 id: 9,
                 date: "09/06/2021",
-                currentPrice: 70000,
+                currentPrice: null,
                 predictPrice: 80000,
                 optionClass: "up",
               },
