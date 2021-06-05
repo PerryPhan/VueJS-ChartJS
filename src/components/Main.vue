@@ -75,7 +75,7 @@ export default {
             formattedLabels: [],
             currentPrices: [], // <- Without it, won't update
             predictPrices: [], // <- Without it, won't update
-            // test: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450], // <- Test case
+            // test: [null, null, null, 120, 257, 271, null, 321, null ], // <- Test case null
                             // 70, 80, 111, 129, 135, 209, 247, 372, 400, 426          // <- Test case
             // Chart Generator
             data:{
@@ -101,6 +101,7 @@ export default {
             chartOptions: {
                 responsive: true,
                 maintainAspectRatio: false,  
+                spanGaps: true,
             }
         }
     },
@@ -123,6 +124,7 @@ export default {
         // ---------------------------------------------------------------------------------
         this.currentPrices = await this.tableData.map( (obj) => obj.currentPrice/ratio ); 
         await this.setDataSet('Current price',this.currentPrices);
+        // await this.setDataSet('Current price',this.test);
         this.predictPrices = await this.tableData.map( (obj) => obj.predictPrice/ratio ); 
         await this.setDataSet('Predicted price',this.predictPrices);
         this.setLabels(this.tableData.map( (obj) => obj.date ));
