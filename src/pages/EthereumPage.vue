@@ -77,7 +77,7 @@ export default {
           id: element.id,
           date: element.datetime_eth,
           currentPrice: element.closing_price,
-          predictPrice: element.predict_hybrid_arima_lstm*10000,
+          predictPrice: element.predict_hybrid_arima_lstm == null ? null : element.predict_hybrid_arima_lstm *10000,
           optionClass: "",
         });
       });
