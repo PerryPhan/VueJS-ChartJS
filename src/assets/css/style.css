@@ -70,7 +70,7 @@ header.component {
     animation-delay: 0.4s;
 }
 .appear{
-    animation-delay: 0.5s;
+    animation-delay: 1.2s;
 }
 @keyframes appear {
     0%{

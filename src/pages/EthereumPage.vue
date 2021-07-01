@@ -10,6 +10,7 @@
 import Footer from "../components/Footer.vue";
 import Header from "../components/Header.vue";
 import Main from "../components/Main.vue";
+import axios from "axios"
 export default {
   components: { Header, Main, Footer },
   data: function () {
@@ -46,73 +47,7 @@ export default {
             id: "coin-02",
             name: "Ethereum",
             image: "icon_ethereum.png",
-            tableData: [
-              {
-                id: 1,
-                date: "10/06/2021",
-                currentPrice: 80000,
-                predictPrice: 90000,
-                optionClass: "up",
-              },
-              {
-                id: 2,
-                date: "11/06/2021",
-                currentPrice: 90000,
-                predictPrice: 120000,
-                optionClass: "up",
-              },
-              {
-                id: 3,
-                date: "12/06/2021",
-                currentPrice: 120000,
-                predictPrice: 130000,
-                optionClass: "up",
-              },
-
-              {
-                id: 4,
-                date: "13/06/2021",
-                currentPrice: 130000,
-                predictPrice: 80000,
-                optionClass: "down",
-              },
-              {
-                id: 5,
-                date: "14/06/2021",
-                currentPrice: 80000,
-                predictPrice: 70000,
-                optionClass: "down",
-              },
-              {
-                id: 6,
-                date: "15/06/2021",
-                currentPrice: 70000,
-                predictPrice: 90000,
-                optionClass: "up",
-              },
-
-              {
-                id: 7,
-                date: "16/06/2021",
-                currentPrice: 90000,
-                predictPrice: 110000,
-                optionClass: "up",
-              },
-              {
-                id: 8,
-                date: "17/06/2021",
-                currentPrice: 130000,
-                predictPrice: 100000,
-                optionClass: "down",
-              },
-              {
-                id: 9,
-                date: "18/06/2021",
-                currentPrice: 100000,
-                predictPrice: 120000,
-                optionClass: "up",
-              },
-            ],
+            tableData: [],
             information: `Ether is the cryptocurrency built 
             on top of the open source Ethereum blockchain, 
             which runs smart contracts. The cryptocurrency acts 
@@ -130,8 +65,32 @@ export default {
       },
     };
   },
-  methods: {},
-  created() {},
+  methods: {
+    init : async function(){
+    let cloneData = axios.get('http://112.78.4.49/api/getDataETH');
+    let result = cloneData.then(response =>response.data);
+    let list = this.mainDetail.coinInfor.tableData;
+
+    await result.then(function(response){
+      response.forEach(element => {
+        list.push({
+          id: element.id,
+          date: element.datetime_eth,
+          currentPrice: element.closing_price,
+          predictPrice: element.predict_hybrid_arima_lstm*10000,
+          optionClass: "",
+        });
+      });
+    })
+    }
+
+  },
+  created() {
+    this.init();
+  },
+  mounted() {
+   
+  },
 };
 </script>
 
