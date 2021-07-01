@@ -19,8 +19,8 @@
                   <!-- FETCH HERE -->
                   <div class="tr" :class="col.optionClass">
                     <div>{{ col.date }}</div>
-                    <div>{{ formatter.format(col.currentPrice) }}</div>
-                    <div>{{ formatter.format(col.predictPrice) }}</div>
+                    <div>{{ col.currentPrice == null ? null : formatter.format(col.currentPrice) }}</div>
+                    <div>{{ col.predictPrice == null ? null : formatter.format(col.predictPrice)  }}</div>
                   </div>
                   <hr />
                 </div>
@@ -81,7 +81,7 @@ export default {
       formattedLabels: [],
       currentPrices: [], // <- Without it, won't update
       predictPrices: [], // <- Without it, won't update
-      // test: [null, null, null, 120, 257, 271, null, 321, null ], // <- Test case null
+    //   test: [10000, 50000, 60000, 70000, 60000, 10000, 'null', 10000, 'null' ], // <- Test case null
       // 70, 80, 111, 129, 135, 209, 247, 372, 400, 426          // <- Test case
       // Chart Generator
       data: {
@@ -157,14 +157,17 @@ export default {
     update: async function() {
       // DO these things to config data, later will pass to LineChart, / 1000 because it has limit.
       var ratio = 1;
+      this.displayData = [... this.tableData ];
+      this.displayData.reverse();
       
       // ---------------------------------------------------------------------------------
       this.currentPrices = await this.displayData.map(
-        (obj) => obj.currentPrice / ratio
+        (obj) => obj.currentPrice = obj.currentPrice!=null ? obj.currentPrice / ratio : null
       );
       this.predictPrices = await this.displayData.map(
-        (obj) => obj.predictPrice / ratio
+        (obj) => obj.predictPrice = obj.predictPrice!=null ? obj.predictPrice / ratio : null
       );
+      console.log( this.predictPrices );
       // ---------------------------------------------------------------------------------
       await this.setDataSet("Current price", this.currentPrices);
       await this.setDataSet("Predicted price", this.predictPrices);
@@ -178,8 +181,6 @@ export default {
   },
   watch: {
     tableData: async function() {
-       this.displayData = this.tableData;
-      this.displayData.reverse();
       this.update();
     },
   },
